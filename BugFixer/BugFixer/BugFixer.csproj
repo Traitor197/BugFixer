@@ -62,8 +62,6 @@
     <Compile Include="Hilfsmittel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Speicherstand.cs" />
-    <Compile Include="Statistik.cs" />
     <EmbeddedResource Include="Anmelden.resx">
       <DependentUpon>Anmelden.cs</DependentUpon>
     </EmbeddedResource>
