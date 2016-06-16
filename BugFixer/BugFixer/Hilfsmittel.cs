@@ -8,6 +8,7 @@ namespace BugFixer
 {
 	class Hilfsmittel
 	{
+        // test
 		public int ID { get; set; }
 		public string Bezeichnung { get; set; }
 		public int Fixwert { get; set; }
