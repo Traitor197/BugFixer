@@ -68,9 +68,9 @@ namespace BugFixer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    string pw = Convert.ToString(reader["Passwort"]);
+                    Account account = Account.mkAccount(reader);
 
-                    if (textBoxPasswort.Text == pw)
+                    if (textBoxPasswort.Text == account.Passwort)
                     {
                         labelStatus.Text = "Anmeldung erfolgreich!";
                     }

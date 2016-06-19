@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BugFixer
 {
-	public partial class Form1 : Form
+	public partial class Spiel : Form
 	{
-		public Form1()
+		public Spiel()
 		{
 			InitializeComponent();
 		}
