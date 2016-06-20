@@ -25,7 +25,10 @@ namespace BugFixer
         {
             try
             {
-                con = new OleDbConnection(Properties.Settings.Default.ConString);
+                OleDbConnectionStringBuilder strbld = new OleDbConnectionStringBuilder();
+                strbld.Provider = "Microsoft.ACE.OLEDB.12.0";
+                strbld.DataSource = Properties.Settings.Default.DbPath;
+                con = new OleDbConnection(strbld.ConnectionString);
                 con.Open();
             }
             catch (Exception)
