@@ -15,12 +15,11 @@ namespace BugFixer
 		public Spiel()
 		{
 			InitializeComponent();
-            this.FormClosing += Closing;
 		}
 
-        private void Closing(object sender, EventArgs e)
+        private void Spiel_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
         }
 	}
 }
