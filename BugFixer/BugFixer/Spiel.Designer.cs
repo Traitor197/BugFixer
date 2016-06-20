@@ -28,48 +28,50 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.listBoxProgrammierer = new System.Windows.Forms.ListBox();
-			this.listBoxVirensucher = new System.Windows.Forms.ListBox();
-			this.SuspendLayout();
-			// 
-			// listBoxProgrammierer
-			// 
-			this.listBoxProgrammierer.FormattingEnabled = true;
-			this.listBoxProgrammierer.ItemHeight = 16;
-			this.listBoxProgrammierer.Location = new System.Drawing.Point(12, 12);
-			this.listBoxProgrammierer.Name = "listBoxProgrammierer";
-			this.listBoxProgrammierer.Size = new System.Drawing.Size(302, 212);
-			this.listBoxProgrammierer.TabIndex = 0;
-			// 
-			// listBoxVirensucher
-			// 
-			this.listBoxVirensucher.FormattingEnabled = true;
-			this.listBoxVirensucher.ItemHeight = 16;
-			this.listBoxVirensucher.Location = new System.Drawing.Point(320, 12);
-			this.listBoxVirensucher.Name = "listBoxVirensucher";
-			this.listBoxVirensucher.Size = new System.Drawing.Size(366, 212);
-			this.listBoxVirensucher.TabIndex = 1;
-			// 
-			// Form1
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(974, 596);
-			this.Controls.Add(this.listBoxVirensucher);
-			this.Controls.Add(this.listBoxProgrammierer);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-			this.Name = "Form1";
-			this.Text = "Form1";
-			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-			this.ResumeLayout(false);
+            this.dataGridViewProgrammierer = new System.Windows.Forms.DataGridView();
+            this.dataGridViewVirensucher = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgrammierer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVirensucher)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dataGridViewProgrammierer
+            // 
+            this.dataGridViewProgrammierer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewProgrammierer.Location = new System.Drawing.Point(29, 35);
+            this.dataGridViewProgrammierer.Name = "dataGridViewProgrammierer";
+            this.dataGridViewProgrammierer.Size = new System.Drawing.Size(517, 416);
+            this.dataGridViewProgrammierer.TabIndex = 2;
+            // 
+            // dataGridViewVirensucher
+            // 
+            this.dataGridViewVirensucher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVirensucher.Location = new System.Drawing.Point(580, 40);
+            this.dataGridViewVirensucher.Name = "dataGridViewVirensucher";
+            this.dataGridViewVirensucher.Size = new System.Drawing.Size(654, 429);
+            this.dataGridViewVirensucher.TabIndex = 3;
+            // 
+            // Spiel
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1314, 635);
+            this.Controls.Add(this.dataGridViewVirensucher);
+            this.Controls.Add(this.dataGridViewProgrammierer);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "Spiel";
+            this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgrammierer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVirensucher)).EndInit();
+            this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.ListBox listBoxProgrammierer;
-		private System.Windows.Forms.ListBox listBoxVirensucher;
+        private System.Windows.Forms.DataGridView dataGridViewProgrammierer;
+        private System.Windows.Forms.DataGridView dataGridViewVirensucher;
 	}
 }
 

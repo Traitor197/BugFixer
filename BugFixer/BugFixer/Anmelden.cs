@@ -73,6 +73,8 @@ namespace BugFixer
                     if (textBoxPasswort.Text == account.Passwort)
                     {
                         labelStatus.Text = "Anmeldung erfolgreich!";
+                        //Spiel spiel = new Spiel(con);
+                        //spiel.Show();
                     }
                     else
                     {

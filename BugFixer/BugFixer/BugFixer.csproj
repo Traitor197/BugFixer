@@ -54,6 +54,7 @@
     <Compile Include="Anmelden.Designer.cs">
       <DependentUpon>Anmelden.cs</DependentUpon>
     </Compile>
+    <Compile Include="Speicherstand.cs" />
     <Compile Include="Spiel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +64,7 @@
     <Compile Include="Hilfsmittel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistik.cs" />
     <EmbeddedResource Include="Anmelden.resx">
       <DependentUpon>Anmelden.cs</DependentUpon>
     </EmbeddedResource>
