@@ -7,7 +7,7 @@ using System.Data.OleDb;
 
 namespace BugFixer
 {
-	class Account
+	public class Account
 	{
 		public int ID { get; set; }
 		public string Nickname { get; set; }

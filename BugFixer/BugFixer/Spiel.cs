@@ -14,15 +14,19 @@ namespace BugFixer
 	public partial class Spiel : Form
 	{
         private OleDbConnection con;
+        private Account account;
+
         private List<Hilfsmittel> listProgrammierer;
         private List<Hilfsmittel> listVirensucher;
 
-		public Spiel()
+		public Spiel(Account account)
 		{
+            this.account = account;
             this.listProgrammierer = new List<Hilfsmittel>();
             this.listVirensucher = new List<Hilfsmittel>();
 
 			InitializeComponent();
+            ModifyDataGridViewStatistik();
             Initialize();
         }
 
@@ -41,7 +45,7 @@ namespace BugFixer
             DataTable dtProgrammierer = new DataTable("Programmierer");
             dtProgrammierer.Columns.Add(new DataColumn("Bezeichnung"));
             dtProgrammierer.Columns.Add(new DataColumn("Kaufkosten", typeof(int)));
-            dtProgrammierer.Columns.Add(new DataColumn("Verbesserungswert", typeof(int)));
+            dtProgrammierer.Columns.Add(new DataColumn("Verbesserungskosten", typeof(int)));
             dtProgrammierer.Columns.Add(new DataColumn("Fixwert", typeof(int)));
             dtProgrammierer.Columns.Add(new DataColumn("Fixwert (Gesamt)", typeof(int)));
 
@@ -59,7 +63,7 @@ namespace BugFixer
             DataTable dtVirensucher = new DataTable("Programmierer");
             dtVirensucher.Columns.Add(new DataColumn("Bezeichnung"));
             dtVirensucher.Columns.Add(new DataColumn("Kaufkosten", typeof(int)));
-            dtVirensucher.Columns.Add(new DataColumn("Verbesserungswert", typeof(int)));
+            dtVirensucher.Columns.Add(new DataColumn("Verbesserungskosten", typeof(int)));
             dtVirensucher.Columns.Add(new DataColumn("Fixwert", typeof(int)));
             dtVirensucher.Columns.Add(new DataColumn("Fixwert (Gesamt)", typeof(int)));
 
@@ -73,6 +77,38 @@ namespace BugFixer
             reader.Close();
             dataGridViewVirensucher.DataSource = dtVirensucher;
 
+            // Statistik
+            DataTable dtStatistik = new DataTable("Statistik");
+
+        }
+
+        private void ModifyDataGridViewStatistik()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Header", typeof(string));
+            dt.Columns.Add("Values", typeof(string));
+            dt.Rows.Add(new Object[] { "H1", "V1" });
+            dt.Rows.Add(new Object[] { "H2", "V2" });
+
+            dataGridViewStatistik.DataSource = dt.DefaultView;
+            dataGridViewStatistik.RowHeadersVisible = true;
+            int numColToFreeze = 2;
+            for (int i = 0; i < numColToFreeze - 1; i++)
+            {
+
+            }
+            /*
+            Dim NumColToFreeze As Int32 = 2
+              With DataGridView1
+                 .RowHeadersVisible = True
+                 For i As Int32 = 0 To NumColToFreeze -1
+                    .Columns(i).Frozen = True ' prevents column from scrolling out of view
+                    .Columns(i).DefaultCellStyle = .RowHeadersDefaultCellStyle ' make it look like a header
+                    .Columns(i).ReadOnly = True
+                 Next
+              End With
+           End Sub
+           */
 
         }
 
