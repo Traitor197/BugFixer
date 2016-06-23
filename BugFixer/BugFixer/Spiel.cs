@@ -28,7 +28,11 @@ namespace BugFixer
 
         private void Initialize()
         {
-            con = new OleDbConnection(Properties.Settings.Default.ConString);
+            OleDbConnectionStringBuilder strBuilder = new OleDbConnectionStringBuilder();
+            strBuilder.Provider = "Microsoft.ACE.OLEDB.12.0";
+            strBuilder.DataSource = Properties.Settings.Default.DbPath;
+
+            con = new OleDbConnection(strBuilder.ConnectionString);
             con.Open();
 
             OleDbCommand cmd = con.CreateCommand();
