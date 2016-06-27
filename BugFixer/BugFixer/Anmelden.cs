@@ -14,8 +14,15 @@ namespace BugFixer
 	public partial class Anmelden : Form
 	{
         private OleDbConnection con = null;
+        public OleDbDataAdapter AdapterAccount { get; set; }
+        public OleDbDataAdapter AdapterHilfsmittel { get; set; }
+        public OleDbDataAdapter AdapterSpeicherstand { get; set; }
+        public OleDbDataAdapter AdapterStatistik { get; set; }
+        public DataTable dtHilfsmittel { get; set; }
+        public DataTable dtSpeicherstand { get; set; }
+        public DataTable dtStatistik { get; set; }
 
-		public Anmelden()
+        public Anmelden()
 		{
 			InitializeComponent();
             Initialize();
@@ -36,6 +43,41 @@ namespace BugFixer
                 labelStatus.Text = "Datenbank konnte nicht geöffnet werden.";
             }
 
+        }
+
+        private void InitAdapters()
+        {
+            OleDbCommandBuilder cmdBuilder;
+            // Instantiate adapters
+            AdapterAccount = new OleDbDataAdapter("SELECT * FROM Account", con);
+            cmdBuilder = new OleDbCommandBuilder(AdapterAccount);
+            AdapterAccount.DeleteCommand = cmdBuilder.GetDeleteCommand();
+            AdapterAccount.InsertCommand = cmdBuilder.GetInsertCommand();
+            AdapterAccount.UpdateCommand = cmdBuilder.GetUpdateCommand();
+
+            /*
+            AdapterHilfsmittel = new OleDbDataAdapter("SELECT * FROM Hilfsmittel", con);
+            cmdBuilder = new OleDbCommandBuilder(AdapterHilfsmittel);
+            AdapterAccount.DeleteCommand = cmdBuilder.GetDeleteCommand();
+            AdapterAccount.InsertCommand = cmdBuilder.GetInsertCommand();
+            AdapterAccount.UpdateCommand = cmdBuilder.GetUpdateCommand();
+
+            AdapterSpeicherstand = new OleDbDataAdapter("SELECT * FROM Speicherstand", con);
+            cmdBuilder = new OleDbCommandBuilder(AdapterSpeicherstand);
+            AdapterSpeicherstand.DeleteCommand = cmdBuilder.GetDeleteCommand();
+            AdapterSpeicherstand.InsertCommand = cmdBuilder.GetInsertCommand();
+            AdapterSpeicherstand.UpdateCommand = cmdBuilder.GetUpdateCommand();
+
+            AdapterStatistik = new OleDbDataAdapter("SELECT * FROM Statistik", con);
+            cmdBuilder = new OleDbCommandBuilder(AdapterStatistik);
+            AdapterStatistik.DeleteCommand = cmdBuilder.GetDeleteCommand();
+            AdapterStatistik.InsertCommand = cmdBuilder.GetInsertCommand();
+            AdapterStatistik.UpdateCommand = cmdBuilder.GetUpdateCommand();
+            */
+        }
+
+        private void FillDataset()
+        {
         }
 
         private bool userInputCheck()
@@ -71,7 +113,7 @@ namespace BugFixer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    Account account = Account.mkAccount(reader);
+                    Account account = account.mkAccount(reader);
 
                     if (textBoxPasswort.Text == account.Passwort)
                     {

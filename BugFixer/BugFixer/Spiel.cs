@@ -15,7 +15,8 @@ namespace BugFixer
 	{
         private OleDbConnection con;
         private Account account;
-
+        private Statistik statistik;
+        
         private List<Hilfsmittel> listProgrammierer;
         private List<Hilfsmittel> listVirensucher;
 
@@ -77,9 +78,6 @@ namespace BugFixer
             reader.Close();
             dataGridViewVirensucher.DataSource = dtVirensucher;
 
-            // Statistik
-            DataTable dtStatistik = new DataTable("Statistik");
-
         }
 
         private void SetupDataGridViewStatistik()
@@ -87,30 +85,22 @@ namespace BugFixer
             DataTable dt = new DataTable();
             dt.Columns.Add("Header", typeof(string));
             dt.Columns.Add("Values", typeof(string));
-            dt.Rows.Add(new Object[] { "H1", "V1" });
-            dt.Rows.Add(new Object[] { "H2", "V2" });
+            dt.Rows.Add(new Object[] { "Aktuelle Fixes", statistik.AktuelleFixes });
+            dt.Rows.Add(new Object[] { "Geklickt", statistik.Geklickt });
+            dt.Rows.Add(new Object[] { "GefixteBugs", statistik.GefixteBugs });
+            dt.Rows.Add(new Object[] { "GefundeneViren", statistik.GefundeneViren });
+            dt.Rows.Add(new Object[] { "AusgegebeneFixes", statistik.AusgegebeneFixes });
+            dt.Rows.Add(new Object[] { "Spielzeit", statistik.VergangeneZeit });
 
             dataGridViewStatistik.DataSource = dt.DefaultView;
             dataGridViewStatistik.RowHeadersVisible = true;
-            int numColToFreeze = 2;
-            for (int i = 0; i < numColToFreeze - 1; i++)
+            int numColToFreeze = 1;
+            for (int i = 0; i < numColToFreeze; i++)
             {
                 dataGridViewStatistik.Columns[i].Frozen = true;
                 dataGridViewStatistik.Columns[i].DefaultCellStyle = dataGridViewStatistik.RowHeadersDefaultCellStyle;
                 dataGridViewStatistik.Columns[i].ReadOnly = true;
             }
-            /*
-            Dim NumColToFreeze As Int32 = 2
-              With DataGridView1
-                 .RowHeadersVisible = True
-                 For i As Int32 = 0 To NumColToFreeze -1
-                    .Columns(i).Frozen = True ' prevents column from scrolling out of view
-                    .Columns(i).DefaultCellStyle = .RowHeadersDefaultCellStyle ' make it look like a header
-                    .Columns(i).ReadOnly = True
-                 Next
-              End With
-           End Sub
-           */
 
         }
 
