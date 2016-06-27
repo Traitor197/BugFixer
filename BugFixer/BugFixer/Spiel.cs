@@ -26,7 +26,7 @@ namespace BugFixer
             this.listVirensucher = new List<Hilfsmittel>();
 
 			InitializeComponent();
-            ModifyDataGridViewStatistik();
+            SetupDataGridViewStatistik();
             Initialize();
         }
 
@@ -82,7 +82,7 @@ namespace BugFixer
 
         }
 
-        private void ModifyDataGridViewStatistik()
+        private void SetupDataGridViewStatistik()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("Header", typeof(string));
@@ -95,7 +95,9 @@ namespace BugFixer
             int numColToFreeze = 2;
             for (int i = 0; i < numColToFreeze - 1; i++)
             {
-
+                dataGridViewStatistik.Columns[i].Frozen = true;
+                dataGridViewStatistik.Columns[i].DefaultCellStyle = dataGridViewStatistik.RowHeadersDefaultCellStyle;
+                dataGridViewStatistik.Columns[i].ReadOnly = true;
             }
             /*
             Dim NumColToFreeze As Int32 = 2

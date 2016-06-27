@@ -77,6 +77,7 @@ namespace BugFixer
                     {
                         labelStatus.Text = "Anmeldung erfolgreich!";
                         Spiel spiel = new Spiel(account);
+                        spiel.Show();
                     }
                     else
                     {

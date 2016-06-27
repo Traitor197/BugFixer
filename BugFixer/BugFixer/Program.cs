@@ -17,7 +17,7 @@ namespace BugFixer
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			//Application.Run(new Anmelden());
-            Application.Run(new Spiel());
+            Application.Run(new Anmelden());
 		}
 	}
 }
