@@ -16,9 +16,6 @@ namespace BugFixer
         private OleDbConnection con;
         private Account account;
 
-        private List<Hilfsmittel> listProgrammierer;
-        private List<Hilfsmittel> listVirensucher;
-
 		public int AktuelleFixes
 		{
 			get
@@ -35,8 +32,6 @@ namespace BugFixer
 		public Spiel(Account account)
 		{
             this.account = account;
-            this.listProgrammierer = new List<Hilfsmittel>();
-            this.listVirensucher = new List<Hilfsmittel>();
 
 			InitializeComponent();
             SetupDataGridViewStatistik();
