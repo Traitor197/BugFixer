@@ -16,15 +16,16 @@ namespace BugFixer
         private OleDbConnection con;
         private Account account;
 
-        private List<Hilfsmittel> listProgrammierer;
-        private List<Hilfsmittel> listVirensucher;
+        private OleDbDataAdapter adapterProgrammierer, adapterVirensucher, adapterStatistik;
+        private DataTable dtProgrammierer, dtVirensucher, dtStatistik;
+  
 
 		public int AktuelleFixes
 		{
 			get
 			{
-				
-				return 
+
+                return 2;
 			}
 			set
 			{
@@ -35,14 +36,34 @@ namespace BugFixer
 		public Spiel(Account account)
 		{
             this.account = account;
-            this.listProgrammierer = new List<Hilfsmittel>();
-            this.listVirensucher = new List<Hilfsmittel>();
 
 			InitializeComponent();
+            InitDataAdapters();
             SetupDataGridViewStatistik();
             Initialize();
 			InitializeControls();
 		}
+
+        private void InitDataAdapters()
+        {
+            adapterProgrammierer = new OleDbDataAdapter("SELECT * FROM Hilfsmittel WHERE findetViren=false", con);
+            OleDbCommandBuilder cmdBuilder = new OleDbCommandBuilder(adapterProgrammierer);
+            adapterProgrammierer.DeleteCommand = cmdBuilder.GetDeleteCommand();
+            adapterProgrammierer.InsertCommand = cmdBuilder.GetInsertCommand();
+            adapterProgrammierer.UpdateCommand = cmdBuilder.GetUpdateCommand();
+
+            adapterVirensucher = new OleDbDataAdapter("SELECT * FROM Hilfsmittel WHERE findetViren=true", con);
+            cmdBuilder = new OleDbCommandBuilder(adapterVirensucher);
+            adapterVirensucher.DeleteCommand = cmdBuilder.GetDeleteCommand();
+            adapterVirensucher.InsertCommand = cmdBuilder.GetInsertCommand();
+            adapterVirensucher.UpdateCommand = cmdBuilder.GetUpdateCommand();
+
+            adapterStatistik = new OleDbDataAdapter("SELECT * FROM Statistik WHERE account=" + account.ID, con);
+            cmdBuilder = new OleDbCommandBuilder(adapterVirensucher);
+            adapterVirensucher.DeleteCommand = cmdBuilder.GetDeleteCommand();
+            adapterVirensucher.InsertCommand = cmdBuilder.GetInsertCommand();
+            adapterVirensucher.UpdateCommand = cmdBuilder.GetUpdateCommand();
+        }
 
         private void Initialize()
         {
@@ -56,43 +77,35 @@ namespace BugFixer
             OleDbCommand cmd = con.CreateCommand();
 
             // Programmierer
-            DataTable dtProgrammierer = new DataTable("Programmierer");
+            dtProgrammierer = new DataTable(); 
+            adapterProgrammierer.Fill(dtProgrammierer);
+            /*
             dtProgrammierer.Columns.Add(new DataColumn("Bezeichnung"));
             dtProgrammierer.Columns.Add(new DataColumn("Kaufkosten", typeof(int)));
             dtProgrammierer.Columns.Add(new DataColumn("Verbesserungskosten", typeof(int)));
             dtProgrammierer.Columns.Add(new DataColumn("Fixwert", typeof(int)));
             dtProgrammierer.Columns.Add(new DataColumn("Fixwert (Gesamt)", typeof(int)));
+            */
 
-            cmd.CommandText = "Select * From Hilfsmittel Where findetViren=false;";
-
-            OleDbDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                AddNewRow(dtProgrammierer, Hilfsmittel.mkHilfsmittel(reader));
-            }
-            reader.Close();
             dataGridViewProgrammierer.DataSource = dtProgrammierer;
 
             // Virensucher
-            DataTable dtVirensucher = new DataTable("Programmierer");
+            dtVirensucher = new DataTable();
+            adapterVirensucher.Fill(dtVirensucher);
+            /*
             dtVirensucher.Columns.Add(new DataColumn("Bezeichnung"));
             dtVirensucher.Columns.Add(new DataColumn("Kaufkosten", typeof(int)));
             dtVirensucher.Columns.Add(new DataColumn("Verbesserungskosten", typeof(int)));
             dtVirensucher.Columns.Add(new DataColumn("Fixwert", typeof(int)));
             dtVirensucher.Columns.Add(new DataColumn("Fixwert (Gesamt)", typeof(int)));
+            */
 
-            cmd.CommandText = "Select * From Hilfsmittel Where findetViren=true;";
-            
-            reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                AddNewRow(dtVirensucher, Hilfsmittel.mkHilfsmittel(reader));
-            }
-            reader.Close();
             dataGridViewVirensucher.DataSource = dtVirensucher;
 
             // Statistik
-            DataTable dtStatistik = new DataTable("Statistik");
+            dtStatistik = new DataTable("Statistik");
+            adapterStatistik.Fill(dtStatistik);
+            dataGridViewStatistik.DataSource = dtStatistik;
         }
 
 		private void InitializeControls()
@@ -136,8 +149,9 @@ namespace BugFixer
 
         }
 
-        private void AddNewRow(DataTable dt, Hilfsmittel hilfsmittel)
+        private void AddNewRow(DataTable dt)
         {
+            /*
             DataRow dr = dt.NewRow();
             dr[0] = hilfsmittel.Bezeichnung; 
             dr[1] = hilfsmittel.Kaufkosten; 
@@ -146,6 +160,7 @@ namespace BugFixer
             dr[4] = hilfsmittel.Fixwert;
 
             dt.Rows.Add(dr);
+            */
         }
 
         private void listBoxVirensucher_SelectedIndexChanged(object sender, EventArgs e)
@@ -188,18 +203,18 @@ namespace BugFixer
 
 		private void buttonKaufen_Click(object sender, EventArgs e)
 		{
-			if(AktuelleFixes >= )
+			if(AktuelleFixes >= 1)
 			{
 
-				AktuelleFixes -= 
+                AktuelleFixes -= 1;
 			}
 		}
 
 		private void buttonVerbessern_Click(object sender, EventArgs e)
 		{
-			if (AktuelleFixes >= )
+			if (AktuelleFixes >= 1)
 			{
-				AktuelleFixes -=
+                AktuelleFixes -= 1;
 			}
 		}
 	}

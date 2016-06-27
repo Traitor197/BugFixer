@@ -113,7 +113,7 @@ namespace BugFixer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    Account account = account.mkAccount(reader);
+                    Account account = Account.mkAccount(reader);
 
                     if (textBoxPasswort.Text == account.Passwort)
                     {
