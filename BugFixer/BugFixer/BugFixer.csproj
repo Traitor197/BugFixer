@@ -98,10 +98,9 @@
     <Content Include="Data\BugFixer.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\Pictures\bug.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Pictures\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

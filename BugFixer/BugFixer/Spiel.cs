@@ -135,5 +135,33 @@ namespace BugFixer
         {
 
         }
-    }
+
+		private void pictureBoxBug_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		bool selectable = true;
+		private void dataGridViewProgrammierer_SelectionChanged(object sender, EventArgs e)
+		{
+			if (selectable == true)
+			{
+				selectable = false;
+				dataGridViewVirensucher.ClearSelection();
+			}
+
+			selectable = true;
+		}
+
+		private void dataGridViewVirensucher_SelectionChanged(object sender, EventArgs e)
+		{
+			if (selectable == true)
+			{
+				selectable = false;
+				dataGridViewProgrammierer.ClearSelection();
+			}
+
+			selectable = true;
+		}
+	}
 }
