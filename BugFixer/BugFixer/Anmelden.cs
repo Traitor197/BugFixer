@@ -132,5 +132,13 @@ namespace BugFixer
 
             reader.Close();
         }
+
+		private void textBoxPasswort_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				buttonAnmelden_Click(sender, new EventArgs());
+			}
+		}
 	}
 }

@@ -19,6 +19,19 @@ namespace BugFixer
         private List<Hilfsmittel> listProgrammierer;
         private List<Hilfsmittel> listVirensucher;
 
+		public int AktuelleFixes
+		{
+			get
+			{
+				
+				return 
+			}
+			set
+			{
+
+			}
+		}
+
 		public Spiel(Account account)
 		{
             this.account = account;
@@ -28,7 +41,8 @@ namespace BugFixer
 			InitializeComponent();
             SetupDataGridViewStatistik();
             Initialize();
-        }
+			InitializeControls();
+		}
 
         private void Initialize()
         {
@@ -50,7 +64,7 @@ namespace BugFixer
             dtProgrammierer.Columns.Add(new DataColumn("Fixwert (Gesamt)", typeof(int)));
 
             cmd.CommandText = "Select * From Hilfsmittel Where findetViren=false;";
-            
+
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -79,10 +93,18 @@ namespace BugFixer
 
             // Statistik
             DataTable dtStatistik = new DataTable("Statistik");
-
         }
 
-        private void SetupDataGridViewStatistik()
+		private void InitializeControls()
+		{
+			Point newLocation = pictureBoxBug.Location;
+			newLocation.X = (this.ClientSize.Width - pictureBoxBug.Width) / 2;
+            pictureBoxBug.Location = newLocation;
+
+			toolStripStatusLabelAccount.Text = "Angemeldet als " + account.Nickname;
+		}
+
+		private void SetupDataGridViewStatistik()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("Header", typeof(string));
@@ -136,11 +158,6 @@ namespace BugFixer
 
         }
 
-		private void pictureBoxBug_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		bool selectable = true;
 		private void dataGridViewProgrammierer_SelectionChanged(object sender, EventArgs e)
 		{
@@ -162,6 +179,28 @@ namespace BugFixer
 			}
 
 			selectable = true;
+		}
+
+		private void pictureBoxBug_MouseDown(object sender, MouseEventArgs e)
+		{
+			AktuelleFixes++;
+		}
+
+		private void buttonKaufen_Click(object sender, EventArgs e)
+		{
+			if(AktuelleFixes >= )
+			{
+
+				AktuelleFixes -= 
+			}
+		}
+
+		private void buttonVerbessern_Click(object sender, EventArgs e)
+		{
+			if (AktuelleFixes >= )
+			{
+				AktuelleFixes -=
+			}
 		}
 	}
 }
