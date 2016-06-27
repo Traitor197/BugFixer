@@ -118,7 +118,7 @@ namespace BugFixer
                     if (textBoxPasswort.Text == account.Passwort)
                     {
                         labelStatus.Text = "Anmeldung erfolgreich!";
-                        Spiel spiel = new Spiel(account);
+                        Spiel spiel = new Spiel(account, con);
                         spiel.Show();
                     }
                     else
@@ -131,8 +131,9 @@ namespace BugFixer
                     labelStatus.Text = "Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 labelStatus.Text = "Datenbankfehler";
             }
 

@@ -33,10 +33,10 @@ namespace BugFixer
 			}
 		}
 
-		public Spiel(Account account)
+		public Spiel(Account account, OleDbConnection con)
 		{
             this.account = account;
-
+            this.con = con;
 			InitializeComponent();
             InitDataAdapters();
             SetupDataGridViewStatistik();
@@ -58,11 +58,11 @@ namespace BugFixer
             adapterVirensucher.InsertCommand = cmdBuilder.GetInsertCommand();
             adapterVirensucher.UpdateCommand = cmdBuilder.GetUpdateCommand();
 
-            adapterStatistik = new OleDbDataAdapter("SELECT * FROM Statistik WHERE account=" + account.ID, con);
-            cmdBuilder = new OleDbCommandBuilder(adapterVirensucher);
-            adapterVirensucher.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            adapterVirensucher.InsertCommand = cmdBuilder.GetInsertCommand();
-            adapterVirensucher.UpdateCommand = cmdBuilder.GetUpdateCommand();
+            adapterStatistik = new OleDbDataAdapter("SELECT * FROM Statistik WHERE Account=" + account.ID.ToString(), con);
+            cmdBuilder = new OleDbCommandBuilder(adapterStatistik);
+            adapterStatistik.DeleteCommand = cmdBuilder.GetDeleteCommand();
+            adapterStatistik.InsertCommand = cmdBuilder.GetInsertCommand();
+            adapterStatistik.UpdateCommand = cmdBuilder.GetUpdateCommand();
         }
 
         private void Initialize()
@@ -103,7 +103,7 @@ namespace BugFixer
             dataGridViewVirensucher.DataSource = dtVirensucher;
 
             // Statistik
-            dtStatistik = new DataTable("Statistik");
+            dtStatistik = new DataTable();
             adapterStatistik.Fill(dtStatistik);
             dataGridViewStatistik.DataSource = dtStatistik;
         }
@@ -161,11 +161,6 @@ namespace BugFixer
 
             dt.Rows.Add(dr);
             */
-        }
-
-        private void listBoxVirensucher_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Spiel_FormClosing(object sender, FormClosingEventArgs e)
