@@ -54,30 +54,6 @@ namespace BugFixer
             AdapterAccount.DeleteCommand = cmdBuilder.GetDeleteCommand();
             AdapterAccount.InsertCommand = cmdBuilder.GetInsertCommand();
             AdapterAccount.UpdateCommand = cmdBuilder.GetUpdateCommand();
-
-            /*
-            AdapterHilfsmittel = new OleDbDataAdapter("SELECT * FROM Hilfsmittel", con);
-            cmdBuilder = new OleDbCommandBuilder(AdapterHilfsmittel);
-            AdapterAccount.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            AdapterAccount.InsertCommand = cmdBuilder.GetInsertCommand();
-            AdapterAccount.UpdateCommand = cmdBuilder.GetUpdateCommand();
-
-            AdapterSpeicherstand = new OleDbDataAdapter("SELECT * FROM Speicherstand", con);
-            cmdBuilder = new OleDbCommandBuilder(AdapterSpeicherstand);
-            AdapterSpeicherstand.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            AdapterSpeicherstand.InsertCommand = cmdBuilder.GetInsertCommand();
-            AdapterSpeicherstand.UpdateCommand = cmdBuilder.GetUpdateCommand();
-
-            AdapterStatistik = new OleDbDataAdapter("SELECT * FROM Statistik", con);
-            cmdBuilder = new OleDbCommandBuilder(AdapterStatistik);
-            AdapterStatistik.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            AdapterStatistik.InsertCommand = cmdBuilder.GetInsertCommand();
-            AdapterStatistik.UpdateCommand = cmdBuilder.GetUpdateCommand();
-            */
-        }
-
-        private void FillDataset()
-        {
         }
 
         private bool userInputCheck()
@@ -162,6 +138,13 @@ namespace BugFixer
                 {
                     reader.Close();
                     cmd.CommandText = "Insert Into Account (Nickname, Passwort) Values ('" + textBoxNickname.Text + "', '" + textBoxPasswort.Text + "');";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT ID FROM Account WHERE Nickname='" + textBoxNickname.Text + "'";
+                    int accountAutowert = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd.CommandText = "Insert Into Statistik (Geklickt, GefixteBugs, GefundeneViren, AusgegebeneFixes, VergangeneZeit, AktuelleFixes, Account) " +
+                        "Values (0, 0, 0, 0, 0, 0, " + accountAutowert + ")";
                     cmd.ExecuteNonQuery();
 
                     labelStatus.Text = "Registrierung erfolgreich!";
