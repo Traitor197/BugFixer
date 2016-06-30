@@ -162,9 +162,9 @@ namespace BugFixer
 			toolStripStatusLabelAccount.Text = "Angemeldet als " + account.Nickname;
 
 			dataGridViewProgrammierer.Columns[0].Visible = false;
-			dataGridViewProgrammierer.Columns[5].Visible = false;
+			dataGridViewProgrammierer.Columns[4].Visible = false;
 			dataGridViewVirensucher.Columns[0].Visible = false;
-			dataGridViewVirensucher.Columns[5].Visible = false;
+			dataGridViewVirensucher.Columns[4].Visible = false;
 
 			labelStatus.Visible = false;
 

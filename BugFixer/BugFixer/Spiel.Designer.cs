@@ -37,7 +37,6 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.dataGridViewProgrammierer = new System.Windows.Forms.DataGridView();
 			this.dataGridViewVirensucher = new System.Windows.Forms.DataGridView();
-			this.buttonVerbessern = new System.Windows.Forms.Button();
 			this.buttonKaufen = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.dataGridViewStatistik = new System.Windows.Forms.DataGridView();
@@ -148,23 +147,12 @@
 			this.dataGridViewVirensucher.TabIndex = 9;
 			this.dataGridViewVirensucher.SelectionChanged += new System.EventHandler(this.dataGridViewVirensucher_SelectionChanged);
 			// 
-			// buttonVerbessern
-			// 
-			this.buttonVerbessern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonVerbessern.Location = new System.Drawing.Point(1089, 612);
-			this.buttonVerbessern.Name = "buttonVerbessern";
-			this.buttonVerbessern.Size = new System.Drawing.Size(189, 43);
-			this.buttonVerbessern.TabIndex = 10;
-			this.buttonVerbessern.Text = "verbessern";
-			this.buttonVerbessern.UseVisualStyleBackColor = true;
-			this.buttonVerbessern.Click += new System.EventHandler(this.buttonVerbessern_Click);
-			// 
 			// buttonKaufen
 			// 
 			this.buttonKaufen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonKaufen.Location = new System.Drawing.Point(946, 612);
 			this.buttonKaufen.Name = "buttonKaufen";
-			this.buttonKaufen.Size = new System.Drawing.Size(137, 43);
+			this.buttonKaufen.Size = new System.Drawing.Size(332, 43);
 			this.buttonKaufen.TabIndex = 11;
 			this.buttonKaufen.Text = "kaufen";
 			this.buttonKaufen.UseVisualStyleBackColor = true;
@@ -322,7 +310,6 @@
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.buttonKaufen);
-			this.Controls.Add(this.buttonVerbessern);
 			this.Controls.Add(this.statusStrip1);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -353,7 +340,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridViewProgrammierer;
         private System.Windows.Forms.DataGridView dataGridViewVirensucher;
-        private System.Windows.Forms.Button buttonVerbessern;
         private System.Windows.Forms.Button buttonKaufen;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dataGridViewStatistik;
