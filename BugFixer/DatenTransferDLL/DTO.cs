@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DatenTransferDLL
 {
-    class DTO
+    public class DTO
     {
         private OleDbConnection con = null;
 
@@ -54,7 +54,7 @@ namespace DatenTransferDLL
             }
             return false;
         }
-
+        /*
         private void InitDataAdapters()
         {
             adapterProgrammierer = new OleDbDataAdapter("SELECT * FROM Hilfsmittel WHERE findetViren=false", con);
@@ -81,5 +81,6 @@ namespace DatenTransferDLL
             adapterSpeicherstand.InsertCommand = cmdBuilder.GetInsertCommand();
             adapterSpeicherstand.UpdateCommand = cmdBuilder.GetUpdateCommand();
         }
+        */
     }
 }

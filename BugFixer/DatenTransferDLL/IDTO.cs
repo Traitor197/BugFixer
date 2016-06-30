@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatenTransferDLL
 {
-    class IDTO
+    public interface IDTO
     {
 
     }
