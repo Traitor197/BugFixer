@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using DatenTransferDLL;
 
 namespace BugFixer
 {
 	public partial class Anmelden : Form
 	{
+        private DTO dto = null;
         private OleDbConnection con = null;
         public OleDbDataAdapter AdapterAccount { get; set; }
         public OleDbDataAdapter AdapterHilfsmittel { get; set; }
@@ -32,6 +34,8 @@ namespace BugFixer
         {
             try
             {
+                dto = new DTO();
+
                 OleDbConnectionStringBuilder strbld = new OleDbConnectionStringBuilder();
                 strbld.Provider = "Microsoft.ACE.OLEDB.12.0";
                 strbld.DataSource = Properties.Settings.Default.DbPath;
@@ -86,7 +90,8 @@ namespace BugFixer
                 cmd.CommandText = "Select * From Account Where Nickname='" + textBoxNickname.Text + "';";
 
                 reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                //if (reader.HasRows)
+                if (dto.PrüfeAccountVorhanden(textBoxNickname.Text))    // DTO
                 {
                     reader.Read();
                     Account account = Account.mkAccount(reader);

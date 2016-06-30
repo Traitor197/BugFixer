@@ -97,7 +97,12 @@
     </Content>
     <Content Include="Data\Pictures\bug.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DatenTransferDLL\DatenTransferDLL.csproj">
+      <Project>{79e38e2e-93ef-47c3-ad23-4ec22c72f455}</Project>
+      <Name>DatenTransferDLL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
