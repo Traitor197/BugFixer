@@ -168,6 +168,24 @@ namespace BugFixer
 			dataGridViewVirensucher.Columns[0].Visible = false;
 			dataGridViewVirensucher.Columns[4].Visible = false;
 
+			dataGridViewProgrammierer.Columns.Add("Gekauft", "Gekauft");
+			dataGridViewVirensucher.Columns.Add("Gekauft", "Gekauft");
+
+			DataRowCollection collection = dtSpeicherstand.Rows;
+			foreach (DataRow row in collection)
+			{
+				DataGridViewRowCollection gridViewCollection = dataGridViewProgrammierer.Rows;
+				foreach(DataGridViewRow gridViewRow in gridViewCollection)
+				{
+					if(Convert.ToInt32(row["Hilfsmittel"]) == Convert.ToInt32(gridViewRow.Cells["ID"].Value))
+					{
+						gridViewRow.Cells["Gekauft"].Value = Convert.ToInt32(row["Anzahl"]);
+						Console.WriteLine(gridViewRow.Cells["Gekauft"].Value);
+						break;
+					}
+				}
+			}
+
 			labelStatus.Visible = false;
 
 			labelFixesProKlick.Text = FixesProKlick.ToString();
@@ -246,31 +264,47 @@ namespace BugFixer
             AktuelleFixes += FixesProKlick;
 
             dtStatistik.Rows[0]["Geklickt"] = Convert.ToInt32(dtStatistik.Rows[0]["Geklickt"]) + 1;
+			dtStatistik.Rows[0]["GefixteBugs"] = Convert.ToInt32(dtStatistik.Rows[0]["GefixteBugs"]) + FixesProKlick;
 
-            UpdateDataGridViewStatistik();
+			UpdateDataGridViewStatistik();
 		}
 
 		private void buttonKaufen_Click(object sender, EventArgs e)
 		{
-			DataGridViewSelectedRowCollection row = dataGridViewProgrammierer.SelectedRows;
+			DataGridViewSelectedRowCollection selectedRow = dataGridViewProgrammierer.SelectedRows;
 
 			bool findetViren = false;
-			if (row.Count <= 0)
+			if (selectedRow.Count <= 0)
 			{
-				row = dataGridViewVirensucher.SelectedRows;
+				selectedRow = dataGridViewVirensucher.SelectedRows;
 				findetViren = true;
 			}
 
-			if (row.Count <= 0)
+			if (selectedRow.Count <= 0)
 				return;
 
-			int kaufkosten = Convert.ToInt32(row[0].Cells[3].Value);
-			int fixwert = Convert.ToInt32(row[0].Cells[2].Value);
+			int kaufkosten = Convert.ToInt32(selectedRow[0].Cells["kaufkosten"].Value);
+			int fixwert = Convert.ToInt32(selectedRow[0].Cells["Fixwert"].Value);
 
 			if (AktuelleFixes >= kaufkosten)
 			{
 
 				AktuelleFixes -= kaufkosten;
+
+				dtStatistik.Rows[0]["AusgegebeneFixes"] = Convert.ToInt32(dtStatistik.Rows[0]["AusgegebeneFixes"]) + kaufkosten;
+				
+				DataRowCollection collection = dtSpeicherstand.Rows;
+				foreach(DataRow row in collection)
+				{
+					int hilfsmittelFK = Convert.ToInt32(row["Hilfsmittel"]);
+					int hilfsmittelPK = Convert.ToInt32(selectedRow[0].Cells["ID"].Value);
+					if (hilfsmittelFK == hilfsmittelPK)
+					{
+						row["Anzahl"] = Convert.ToInt32(row["Anzahl"]) + 1;
+						selectedRow[0].Cells["Gekauft"].Value = Convert.ToInt32(row["Anzahl"]);
+					}
+				}
+
 				if (findetViren)
 				{
 					FixesProSekunde += fixwert;
@@ -290,16 +324,6 @@ namespace BugFixer
 			{
 				labelStatus.Text = "Es fehlen " + (kaufkosten - AktuelleFixes) + " Fixes!";
 				labelStatus.Visible = true;
-			}
-		}
-
-		private void buttonVerbessern_Click(object sender, EventArgs e)
-		{
-			if (AktuelleFixes >= 1)
-			{
-                AktuelleFixes -= 1;
-
-                UpdateDataGridViewStatistik();
 			}
 		}
 
