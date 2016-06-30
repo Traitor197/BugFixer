@@ -45,6 +45,11 @@
 			this.labelFixes = new System.Windows.Forms.Label();
 			this.pictureBoxBug = new System.Windows.Forms.PictureBox();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			this.labelStatus = new System.Windows.Forms.Label();
+			this.labelFixesProSekunde = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.labelFixesProKlick = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgrammierer)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewVirensucher)).BeginInit();
@@ -118,6 +123,7 @@
 			this.dataGridViewProgrammierer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
 			this.dataGridViewProgrammierer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewProgrammierer.Location = new System.Drawing.Point(424, 34);
+			this.dataGridViewProgrammierer.MultiSelect = false;
 			this.dataGridViewProgrammierer.Name = "dataGridViewProgrammierer";
 			this.dataGridViewProgrammierer.ReadOnly = true;
 			this.dataGridViewProgrammierer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -134,6 +140,7 @@
 			this.dataGridViewVirensucher.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
 			this.dataGridViewVirensucher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewVirensucher.Location = new System.Drawing.Point(845, 34);
+			this.dataGridViewVirensucher.MultiSelect = false;
 			this.dataGridViewVirensucher.Name = "dataGridViewVirensucher";
 			this.dataGridViewVirensucher.ReadOnly = true;
 			this.dataGridViewVirensucher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -195,6 +202,7 @@
 			this.dataGridViewStatistik.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
 			this.dataGridViewStatistik.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewStatistik.Location = new System.Drawing.Point(3, 34);
+			this.dataGridViewStatistik.MultiSelect = false;
 			this.dataGridViewStatistik.Name = "dataGridViewStatistik";
 			this.dataGridViewStatistik.ReadOnly = true;
 			this.dataGridViewStatistik.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -205,9 +213,10 @@
 			// 
 			this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(12, 618);
+			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Location = new System.Drawing.Point(12, 609);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(101, 37);
+			this.label4.Size = new System.Drawing.Size(118, 42);
 			this.label4.TabIndex = 13;
 			this.label4.Text = "Fixes:";
 			// 
@@ -216,9 +225,10 @@
 			this.labelFixes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelFixes.AutoSize = true;
 			this.labelFixes.BackColor = System.Drawing.Color.LawnGreen;
-			this.labelFixes.Location = new System.Drawing.Point(119, 618);
+			this.labelFixes.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelFixes.Location = new System.Drawing.Point(136, 609);
 			this.labelFixes.Name = "labelFixes";
-			this.labelFixes.Size = new System.Drawing.Size(81, 37);
+			this.labelFixes.Size = new System.Drawing.Size(95, 42);
 			this.labelFixes.TabIndex = 14;
 			this.labelFixes.Text = "fixes";
 			// 
@@ -240,11 +250,73 @@
 			this.timer1.Interval = 1000;
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
+			// labelStatus
+			// 
+			this.labelStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelStatus.AutoSize = true;
+			this.labelStatus.ForeColor = System.Drawing.Color.Red;
+			this.labelStatus.Location = new System.Drawing.Point(939, 572);
+			this.labelStatus.Name = "labelStatus";
+			this.labelStatus.Size = new System.Drawing.Size(175, 37);
+			this.labelStatus.TabIndex = 16;
+			this.labelStatus.Text = "labelStatus";
+			// 
+			// labelFixesProSekunde
+			// 
+			this.labelFixesProSekunde.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelFixesProSekunde.AutoSize = true;
+			this.labelFixesProSekunde.BackColor = System.Drawing.Color.LawnGreen;
+			this.labelFixesProSekunde.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelFixesProSekunde.Location = new System.Drawing.Point(359, 566);
+			this.labelFixesProSekunde.Name = "labelFixesProSekunde";
+			this.labelFixesProSekunde.Size = new System.Drawing.Size(95, 42);
+			this.labelFixesProSekunde.TabIndex = 18;
+			this.labelFixesProSekunde.Text = "fixes";
+			// 
+			// label6
+			// 
+			this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.Location = new System.Drawing.Point(12, 567);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(341, 42);
+			this.label6.TabIndex = 17;
+			this.label6.Text = "Fixes pro Sekunde:";
+			// 
+			// labelFixesProKlick
+			// 
+			this.labelFixesProKlick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelFixesProKlick.AutoSize = true;
+			this.labelFixesProKlick.BackColor = System.Drawing.Color.LawnGreen;
+			this.labelFixesProKlick.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelFixesProKlick.Location = new System.Drawing.Point(289, 525);
+			this.labelFixesProKlick.Name = "labelFixesProKlick";
+			this.labelFixesProKlick.Size = new System.Drawing.Size(95, 42);
+			this.labelFixesProKlick.TabIndex = 20;
+			this.labelFixesProKlick.Text = "fixes";
+			// 
+			// label8
+			// 
+			this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label8.AutoSize = true;
+			this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label8.Location = new System.Drawing.Point(12, 525);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(271, 42);
+			this.label8.TabIndex = 19;
+			this.label8.Text = "Fixes pro Klick:";
+			// 
 			// Spiel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1290, 705);
+			this.Controls.Add(this.labelFixesProKlick);
+			this.Controls.Add(this.label8);
+			this.Controls.Add(this.labelFixesProSekunde);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.labelStatus);
 			this.Controls.Add(this.pictureBoxBug);
 			this.Controls.Add(this.labelFixes);
 			this.Controls.Add(this.label4);
@@ -289,6 +361,11 @@
         private System.Windows.Forms.Label labelFixes;
         private System.Windows.Forms.PictureBox pictureBoxBug;
         private System.Windows.Forms.Timer timer1;
+		private System.Windows.Forms.Label labelStatus;
+		private System.Windows.Forms.Label labelFixesProSekunde;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label labelFixesProKlick;
+		private System.Windows.Forms.Label label8;
 	}
 }
 
