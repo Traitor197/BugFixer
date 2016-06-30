@@ -160,6 +160,16 @@ namespace BugFixer
             pictureBoxBug.Location = newLocation;
 
 			toolStripStatusLabelAccount.Text = "Angemeldet als " + account.Nickname;
+
+			dataGridViewProgrammierer.Columns[0].Visible = false;
+			dataGridViewProgrammierer.Columns[5].Visible = false;
+			dataGridViewVirensucher.Columns[0].Visible = false;
+			dataGridViewVirensucher.Columns[5].Visible = false;
+
+			labelStatus.Visible = false;
+
+			labelFixesProKlick.Text = FixesProKlick.ToString();
+			labelFixesProSekunde.Text = FixesProSekunde.ToString();
 		}
 
 		private void SetupDataGridViewStatistik()
@@ -168,9 +178,9 @@ namespace BugFixer
             dt.Columns.Add("Header", typeof(string));
             dt.Columns.Add("Values", typeof(string));
 
-            for (int i = 0; i < dtStatistik.Columns.Count; i++)
+            for (int i = 0; i < dtStatistik.Columns.Count - 2; i++)
             {
-                DataColumn col = dtStatistik.Columns[i];
+                DataColumn col = dtStatistik.Columns[i + 1];
                 DataRow row = dtStatistik.Rows[0];
                 dt.Rows.Add(new Object[] { col.Caption, row[i] });
             }
@@ -193,11 +203,11 @@ namespace BugFixer
             DataRow row = dtStatistik.Rows[0];
             DataTable table = (DataTable)dataGridViewStatistik.DataSource;
 
-            for (int i = 0; i < dtStatistik.Columns.Count; i++)
+			for (int i = 0; i < dtStatistik.Columns.Count - 2; i++)
             {
-                table.Rows[i][1] = row[i];
+                table.Rows[i][1] = row[i + 1];
             }
-        }
+		}
 
         private void Spiel_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -240,12 +250,44 @@ namespace BugFixer
 
 		private void buttonKaufen_Click(object sender, EventArgs e)
 		{
-			if(AktuelleFixes >= 1)
+			DataGridViewSelectedRowCollection row = dataGridViewProgrammierer.SelectedRows;
+
+			bool findetViren = false;
+			if (row.Count <= 0)
+			{
+				row = dataGridViewVirensucher.SelectedRows;
+				findetViren = true;
+			}
+
+			if (row.Count <= 0)
+				return;
+
+			int kaufkosten = Convert.ToInt32(row[0].Cells[3].Value);
+			int fixwert = Convert.ToInt32(row[0].Cells[2].Value);
+
+			if (AktuelleFixes >= kaufkosten)
 			{
 
-                AktuelleFixes -= 1;
+				AktuelleFixes -= kaufkosten;
+				if (findetViren)
+				{
+					FixesProSekunde += fixwert;
+					labelFixesProSekunde.Text = FixesProSekunde.ToString();
+				}
+				else
+				{
+					FixesProKlick += fixwert;
+					labelFixesProKlick.Text = FixesProKlick.ToString();
+				}
 
-                UpdateDataGridViewStatistik();
+				UpdateDataGridViewStatistik();
+				labelStatus.Visible = false;
+
+			}
+			else
+			{
+				labelStatus.Text = "Es fehlen " + (kaufkosten - AktuelleFixes) + " Fixes!";
+				labelStatus.Visible = true;
 			}
 		}
 
