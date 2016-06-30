@@ -240,6 +240,7 @@ namespace BugFixer
 
 		private void buttonKaufen_Click(object sender, EventArgs e)
 		{
+
 			if(AktuelleFixes >= 1)
 			{
 
