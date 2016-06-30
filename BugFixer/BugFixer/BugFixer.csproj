@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
     <Compile Include="Anmelden.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +100,10 @@
     <ProjectReference Include="..\DatenTransferDLL\DatenTransferDLL.csproj">
       <Project>{79e38e2e-93ef-47c3-ad23-4ec22c72f455}</Project>
       <Name>DatenTransferDLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelBugFixer\ModelBugFixer.csproj">
+      <Project>{df9e3e6a-717c-4c38-8eca-0bc0101f0dde}</Project>
+      <Name>ModelBugFixer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

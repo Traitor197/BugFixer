@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using DatenTransferDLL;
+using ModelBugFixer;
 
 namespace BugFixer
 {
@@ -79,6 +80,28 @@ namespace BugFixer
 
         private void buttonAnmelden_Click(object sender, EventArgs e)
         {
+            if (!userInputCheck())
+                return;
+
+            Account account = dto.GetAccountFromNickname(textBoxNickname.Text);
+
+            if (account != null)
+            {
+                if (account.Passwort == textBoxPasswort.Text)
+                {
+                    labelStatus.Text = "Anmeldung erfolgreich!";
+                    Spiel spiel = new Spiel(account, con);
+                    spiel.Show();
+
+                    return;
+                }
+            }
+
+            labelStatus.Text = "Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.";
+        }
+
+        private void buttonAnmelden_Click1(object sender, EventArgs e)
+        {
             // Vorgang abbrechen wenn Benutzer ungültige Werte eingibt
             if (!userInputCheck())
                 return;
@@ -90,8 +113,7 @@ namespace BugFixer
                 cmd.CommandText = "Select * From Account Where Nickname='" + textBoxNickname.Text + "';";
 
                 reader = cmd.ExecuteReader();
-                //if (reader.HasRows)
-                if (dto.PrüfeAccountVorhanden(textBoxNickname.Text))    // DTO
+                if (reader.HasRows)
                 {
                     reader.Read();
                     Account account = Account.mkAccount(reader);
@@ -123,6 +145,20 @@ namespace BugFixer
         }
 
         private void buttonRegistrieren_Click(object sender, EventArgs e)
+        {
+            // Vorgang abbrechen wenn Benutzer ungültige Werte eingibt
+            if (!userInputCheck())
+                return;
+
+            Account account = dto.GetAccountFromNickname(textBoxNickname.Text);
+
+            if (account == null)
+            {
+
+            }
+        }
+
+        private void buttonRegistrieren_Click1(object sender, EventArgs e)
         {
             // Vorgang abbrechen wenn User ungültige Werte eingibt
             if (!userInputCheck())

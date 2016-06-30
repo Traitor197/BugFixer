@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFixer", "BugFixer\BugFix
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatenTransferDLL", "DatenTransferDLL\DatenTransferDLL.csproj", "{79E38E2E-93EF-47C3-AD23-4EC22C72F455}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelBugFixer", "ModelBugFixer\ModelBugFixer.csproj", "{DF9E3E6A-717C-4C38-8ECA-0BC0101F0DDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{79E38E2E-93EF-47C3-AD23-4EC22C72F455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79E38E2E-93EF-47C3-AD23-4EC22C72F455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79E38E2E-93EF-47C3-AD23-4EC22C72F455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF9E3E6A-717C-4C38-8ECA-0BC0101F0DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9E3E6A-717C-4C38-8ECA-0BC0101F0DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9E3E6A-717C-4C38-8ECA-0BC0101F0DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9E3E6A-717C-4C38-8ECA-0BC0101F0DDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

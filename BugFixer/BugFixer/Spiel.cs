@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using ModelBugFixer;
+using DatenTransferDLL;
 
 namespace BugFixer
 {
 	public partial class Spiel : Form
 	{
+        private DTO dto;
         private OleDbConnection con;
         private Account account;
 
@@ -39,10 +42,11 @@ namespace BugFixer
 			}
 		}
 
-		public Spiel(Account account, OleDbConnection con)
+        public Spiel(Account account, OleDbConnection con)
 		{
             this.account = account;
             this.con = con;
+            this.dto = new DTO();
             FixesProKlick = 1;
             FixesProSekunde = 0;
 
