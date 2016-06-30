@@ -124,7 +124,6 @@ namespace BugFixer
                     if (Convert.ToInt32(row2["Hilfsmittel"]) == id)
                     {
                         int anzahl = Convert.ToInt32(row2["Anzahl"]);
-                        int stufe = Convert.ToInt32(row2["Verbesserungsstufe"]);
                         int fixwert = Convert.ToInt32(row["Fixwert"]);
 
                         FixesProKlick += fixwert * anzahl;
@@ -142,7 +141,6 @@ namespace BugFixer
                     if (Convert.ToInt32(row2["Hilfsmittel"]) == id)
                     {
                         int anzahl = Convert.ToInt32(row2["Anzahl"]);
-                        int stufe = Convert.ToInt32(row2["Verbesserungsstufe"]);
                         int fixwert = Convert.ToInt32(row["Fixwert"]);
 
                         FixesProSekunde += fixwert * anzahl;
