@@ -20,7 +20,7 @@ namespace BugFixer
 
         private DataTable dtProgrammierer, dtVirensucher, dtStatistik, dtSpeicherstand;
 
-        private float kostenMultiplier = 1.1f;
+        private float kostenMultiplier = 1.25f;
 
         public int FixesProSekunde { get; set; }
         public int FixesProKlick { get; set; }
