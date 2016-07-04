@@ -43,12 +43,13 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.labelFixes = new System.Windows.Forms.Label();
 			this.pictureBoxBug = new System.Windows.Forms.PictureBox();
-			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			this.timerCountSeconds = new System.Windows.Forms.Timer(this.components);
 			this.labelStatus = new System.Windows.Forms.Label();
 			this.labelFixesProSekunde = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.labelFixesProKlick = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
+			this.timerGridViews = new System.Windows.Forms.Timer(this.components);
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgrammierer)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewVirensucher)).BeginInit();
@@ -233,10 +234,10 @@
 			this.pictureBoxBug.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBug_MouseDown);
 			this.pictureBoxBug.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBug_MouseUp);
 			// 
-			// timer1
+			// timerCountSeconds
 			// 
-			this.timer1.Interval = 1000;
-			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+			this.timerCountSeconds.Interval = 1000;
+			this.timerCountSeconds.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
 			// labelStatus
 			// 
@@ -295,6 +296,11 @@
 			this.label8.TabIndex = 19;
 			this.label8.Text = "Fixes pro Klick:";
 			// 
+			// timerGridViews
+			// 
+			this.timerGridViews.Enabled = true;
+			this.timerGridViews.Tick += new System.EventHandler(this.timerGridViews_Tick);
+			// 
 			// Spiel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
@@ -346,12 +352,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelFixes;
         private System.Windows.Forms.PictureBox pictureBoxBug;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerCountSeconds;
 		private System.Windows.Forms.Label labelStatus;
 		private System.Windows.Forms.Label labelFixesProSekunde;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label labelFixesProKlick;
 		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Timer timerGridViews;
 	}
 }
 
