@@ -119,13 +119,14 @@
 			this.dataGridViewProgrammierer.AllowUserToAddRows = false;
 			this.dataGridViewProgrammierer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dataGridViewProgrammierer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+			this.dataGridViewProgrammierer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
 			this.dataGridViewProgrammierer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
 			this.dataGridViewProgrammierer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewProgrammierer.Location = new System.Drawing.Point(424, 34);
 			this.dataGridViewProgrammierer.MultiSelect = false;
 			this.dataGridViewProgrammierer.Name = "dataGridViewProgrammierer";
 			this.dataGridViewProgrammierer.ReadOnly = true;
+			this.dataGridViewProgrammierer.RowHeadersVisible = false;
 			this.dataGridViewProgrammierer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridViewProgrammierer.Size = new System.Drawing.Size(415, 392);
 			this.dataGridViewProgrammierer.TabIndex = 8;
@@ -136,13 +137,14 @@
 			this.dataGridViewVirensucher.AllowUserToAddRows = false;
 			this.dataGridViewVirensucher.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dataGridViewVirensucher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+			this.dataGridViewVirensucher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
 			this.dataGridViewVirensucher.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
 			this.dataGridViewVirensucher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewVirensucher.Location = new System.Drawing.Point(845, 34);
 			this.dataGridViewVirensucher.MultiSelect = false;
 			this.dataGridViewVirensucher.Name = "dataGridViewVirensucher";
 			this.dataGridViewVirensucher.ReadOnly = true;
+			this.dataGridViewVirensucher.RowHeadersVisible = false;
 			this.dataGridViewVirensucher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridViewVirensucher.Size = new System.Drawing.Size(415, 392);
 			this.dataGridViewVirensucher.TabIndex = 9;

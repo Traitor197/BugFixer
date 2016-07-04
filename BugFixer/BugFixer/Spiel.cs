@@ -57,15 +57,16 @@ namespace BugFixer
             SetupDataGridViewStatistik();
 
             // Ändere Schriftgröße der DataGridViews
+			
             dataGridViewProgrammierer.RowHeadersVisible = false;
-            dataGridViewProgrammierer.DefaultCellStyle.Font = new Font("Times New Roman", 14);
-            dataGridViewProgrammierer.RowHeadersDefaultCellStyle.Font = new Font("Times New Roman", 14);
-            dataGridViewProgrammierer.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 14);
+            dataGridViewProgrammierer.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 14);
+            dataGridViewProgrammierer.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 14);
+			dataGridViewProgrammierer.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 14);
 
-            dataGridViewVirensucher.RowHeadersVisible = false;
-            dataGridViewVirensucher.DefaultCellStyle.Font = new Font("Times New Roman", 14);
-            dataGridViewVirensucher.RowHeadersDefaultCellStyle.Font = new Font("Times New Roman", 14);
-            dataGridViewVirensucher.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 14);
+			dataGridViewVirensucher.RowHeadersVisible = false;
+			dataGridViewVirensucher.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 14);
+			dataGridViewVirensucher.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 14);
+			dataGridViewVirensucher.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 14);
 
 			InitializeControls();
 
@@ -155,6 +156,9 @@ namespace BugFixer
 
 		private void InitializeDataGridViews()
 		{
+			dataGridViewProgrammierer.Sort(dataGridViewProgrammierer.Columns["Kaufkosten"], ListSortDirection.Ascending);
+			dataGridViewVirensucher.Sort(dataGridViewVirensucher.Columns["Kaufkosten"], ListSortDirection.Ascending);
+
 			DataGridViewRowCollection rows = dataGridViewProgrammierer.Rows;
 			DataRowCollection collection = dtSpeicherstand.Rows;
 			foreach (DataRow row in collection)
