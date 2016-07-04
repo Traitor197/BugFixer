@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using DatenTransferDLL;
+using ModelBugFixer;
 
 namespace BugFixer
 {
@@ -79,50 +80,42 @@ namespace BugFixer
 
         private void buttonAnmelden_Click(object sender, EventArgs e)
         {
+            if (!userInputCheck())
+                return;
+
+            Account account = dto.GetAccountFromNickname(textBoxNickname.Text);
+
+            if (account != null)
+            {
+                if (account.Passwort == textBoxPasswort.Text)
+                {
+                    labelStatus.Text = "Anmeldung erfolgreich!";
+                    Spiel spiel = new Spiel(account, con);
+                    spiel.Show();
+
+                    return;
+                }
+            }
+
+            labelStatus.Text = "Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.";
+        }
+
+        private void buttonRegistrieren_Click(object sender, EventArgs e)
+        {
             // Vorgang abbrechen wenn Benutzer ungültige Werte eingibt
             if (!userInputCheck())
                 return;
 
-            OleDbDataReader reader = null;
-            try
+            Account account = dto.GetAccountFromNickname(textBoxNickname.Text);
+
+            if (account == null)
             {
-                OleDbCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From Account Where Nickname='" + textBoxNickname.Text + "';";
-
-                reader = cmd.ExecuteReader();
-                //if (reader.HasRows)
-                if (dto.PrüfeAccountVorhanden(textBoxNickname.Text))    // DTO
-                {
-                    reader.Read();
-                    Account account = Account.mkAccount(reader);
-
-                    if (textBoxPasswort.Text == account.Passwort)
-                    {
-                        labelStatus.Text = "Anmeldung erfolgreich!";
-                        Spiel spiel = new Spiel(account, con);
-                        spiel.Show();
-                    }
-                    else
-                    {
-                        labelStatus.Text = "Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.";
-                    }
-                }
-                else
-                {
-                    labelStatus.Text = "Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.";
-                }
+                dto.InsertNewAccount(textBoxNickname.Text, textBoxPasswort.Text);
+                labelStatus.Text = "Registrierung erfolgreich!";
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                labelStatus.Text = "Datenbankfehler";
-            }
-
-            reader.Close();
-
         }
 
-        private void buttonRegistrieren_Click(object sender, EventArgs e)
+        private void buttonRegistrieren_Click1(object sender, EventArgs e)
         {
             // Vorgang abbrechen wenn User ungültige Werte eingibt
             if (!userInputCheck())

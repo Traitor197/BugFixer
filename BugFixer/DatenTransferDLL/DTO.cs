@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModelBugFixer;
 
 namespace DatenTransferDLL
 {
@@ -54,6 +55,91 @@ namespace DatenTransferDLL
             }
             return false;
         }
+
+        public bool InsertNewAccount(string nickname, string passwort)
+        {
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "Insert Into Account (Nickname, Passwort) Values ('" + nickname + "', '" + passwort + "');";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "SELECT ID FROM Account WHERE Nickname='" + nickname + "'";
+            int accountAutowert = Convert.ToInt32(cmd.ExecuteScalar());
+
+            InsertNewStatistik(accountAutowert);
+            InsertNewAccountSpeicherstände(accountAutowert);
+
+            return true;
+        }
+
+        private void InsertNewStatistik(int accountAutowert)
+        {
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "Insert Into Statistik (Geklickt, GefixteBugs, GefundeneViren, AusgegebeneFixes, VergangeneZeit, AktuelleFixes, Account) " +
+                                    "Values (0, 0, 0, 0, 0, 0, " + accountAutowert + ")";
+            cmd.ExecuteNonQuery();
+        }
+
+        private void InsertNewAccountSpeicherstände(int accountAutowert)
+        {
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM Hilfsmittel";
+            OleDbCommand cmd2 = con.CreateCommand();
+
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                cmd2.CommandText = "INSERT INTO Speicherstand (Account, Hilfsmittel, Anzahl) VALUES (" + accountAutowert + ", " + reader["ID"] + ", 0)";
+                cmd2.ExecuteNonQuery();
+            }
+        }
+
+        public Account GetAccountFromNickname(string nickname)
+        {
+            Account account;
+            OleDbDataReader reader = null;
+            try
+            {
+                OleDbCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select * From Account Where Nickname='" + nickname + "';";
+
+                reader = cmd.ExecuteReader();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Datenbankfehler");
+            }
+
+            if (reader.HasRows)
+            { 
+                reader.Read();
+                account = Account.mkAccount(reader);
+            }
+            else
+            {
+                account = null;
+            }
+
+            reader.Close();
+
+            return account;
+        }
+
+        public bool PrüfeAccountUndPasswort(string nickname, string passwort)
+        {
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "Select * From Account Where Nickname='" + nickname + "';";
+
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                return false;
+            }
+            return true;
+            throw new Exception("Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.");
+
+
+        }
+
         /*
         private void InitDataAdapters()
         {
