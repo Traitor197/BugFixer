@@ -65,11 +65,32 @@ namespace DatenTransferDLL
             cmd.CommandText = "SELECT ID FROM Account WHERE Nickname='" + nickname + "'";
             int accountAutowert = Convert.ToInt32(cmd.ExecuteScalar());
 
-            cmd.CommandText = "Insert Into Statistik (Geklickt, GefixteBugs, GefundeneViren, AusgegebeneFixes, VergangeneZeit, AktuelleFixes, Account) " +
-                "Values (0, 0, 0, 0, 0, 0, " + accountAutowert + ")";
-            cmd.ExecuteNonQuery();
+            InsertNewStatistik(accountAutowert);
+            InsertNewAccountSpeicherstände(accountAutowert);
 
             return true;
+        }
+
+        private void InsertNewStatistik(int accountAutowert)
+        {
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "Insert Into Statistik (Geklickt, GefixteBugs, GefundeneViren, AusgegebeneFixes, VergangeneZeit, AktuelleFixes, Account) " +
+                                    "Values (0, 0, 0, 0, 0, 0, " + accountAutowert + ")";
+            cmd.ExecuteNonQuery();
+        }
+
+        private void InsertNewAccountSpeicherstände(int accountAutowert)
+        {
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM Hilfsmittel";
+            OleDbCommand cmd2 = con.CreateCommand();
+
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                cmd2.CommandText = "INSERT INTO Speicherstand (Account, Hilfsmittel, Anzahl) VALUES (" + accountAutowert + ", " + reader["ID"] + ", 0)";
+                cmd2.ExecuteNonQuery();
+            }
         }
 
         public Account GetAccountFromNickname(string nickname)

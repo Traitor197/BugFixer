@@ -100,50 +100,6 @@ namespace BugFixer
             labelStatus.Text = "Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.";
         }
 
-        private void buttonAnmelden_Click1(object sender, EventArgs e)
-        {
-            // Vorgang abbrechen wenn Benutzer ungültige Werte eingibt
-            if (!userInputCheck())
-                return;
-
-            OleDbDataReader reader = null;
-            try
-            {
-                OleDbCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From Account Where Nickname='" + textBoxNickname.Text + "';";
-
-                reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    Account account = Account.mkAccount(reader);
-
-                    if (textBoxPasswort.Text == account.Passwort)
-                    {
-                        labelStatus.Text = "Anmeldung erfolgreich!";
-                        Spiel spiel = new Spiel(account, con);
-                        spiel.Show();
-                    }
-                    else
-                    {
-                        labelStatus.Text = "Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.";
-                    }
-                }
-                else
-                {
-                    labelStatus.Text = "Anmeldung fehlgeschlagen!\nNickname oder Passwort ist falsch.";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                labelStatus.Text = "Datenbankfehler";
-            }
-
-            reader.Close();
-
-        }
-
         private void buttonRegistrieren_Click(object sender, EventArgs e)
         {
             // Vorgang abbrechen wenn Benutzer ungültige Werte eingibt
@@ -154,7 +110,8 @@ namespace BugFixer
 
             if (account == null)
             {
-
+                dto.InsertNewAccount(textBoxNickname.Text, textBoxPasswort.Text);
+                labelStatus.Text = "Registrierung erfolgreich!";
             }
         }
 
