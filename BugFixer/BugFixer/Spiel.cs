@@ -55,7 +55,6 @@ namespace BugFixer
             InitializeDTO();
             Initialize();
             SetupDataGridViewStatistik();
-			InitializeControls();
 
             // Ändere Schriftgröße der DataGridViews
             dataGridViewProgrammierer.RowHeadersVisible = false;
@@ -68,8 +67,11 @@ namespace BugFixer
             dataGridViewVirensucher.RowHeadersDefaultCellStyle.Font = new Font("Times New Roman", 14);
             dataGridViewVirensucher.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 14);
 
-            timer1.Enabled = true;
-		}
+			InitializeControls();
+
+            timerCountSeconds.Enabled = true;
+			InitializeDataGridViews();
+        }
 
         private void InitializeDTO()
         {
@@ -145,25 +147,43 @@ namespace BugFixer
 			dataGridViewProgrammierer.Columns.Add("Gekauft", "Gekauft");
 			dataGridViewVirensucher.Columns.Add("Gekauft", "Gekauft");
 
-			DataRowCollection collection = dtSpeicherstand.Rows;
-			foreach (DataRow row in collection)
-			{
-				DataGridViewRowCollection gridViewCollection = dataGridViewProgrammierer.Rows;
-				foreach(DataGridViewRow gridViewRow in gridViewCollection)
-				{
-					if(Convert.ToInt32(row["Hilfsmittel"]) == Convert.ToInt32(gridViewRow.Cells["ID"].Value))
-					{
-						gridViewRow.Cells["Gekauft"].Value = Convert.ToInt32(row["Anzahl"]);
-						Console.WriteLine(gridViewRow.Cells["Gekauft"].Value);
-						break;
-					}
-				}
-			}
-
 			labelStatus.Visible = false;
 
 			labelFixesProKlick.Text = FixesProKlick.ToString();
 			labelFixesProSekunde.Text = FixesProSekunde.ToString();
+		}
+
+		private void InitializeDataGridViews()
+		{
+			DataGridViewRowCollection rows = dataGridViewProgrammierer.Rows;
+			DataRowCollection collection = dtSpeicherstand.Rows;
+			foreach (DataRow row in collection)
+			{
+				foreach (DataGridViewRow gridViewRow in rows)
+				{
+					int hilfsmittelFK = Convert.ToInt32(row["Hilfsmittel"]);
+					int hilfsmittelPK = Convert.ToInt32(gridViewRow.Cells["ID"].Value);
+					if (hilfsmittelFK == hilfsmittelPK)
+					{
+						gridViewRow.Cells["Gekauft"].Value = Convert.ToInt32(row["Anzahl"]);
+					}
+				}
+			}
+
+			rows = dataGridViewVirensucher.Rows;
+			collection = dtSpeicherstand.Rows;
+			foreach (DataRow row in collection)
+			{
+				foreach (DataGridViewRow gridViewRow in rows)
+				{
+					int hilfsmittelFK = Convert.ToInt32(row["Hilfsmittel"]);
+					int hilfsmittelPK = Convert.ToInt32(gridViewRow.Cells["ID"].Value);
+					if (hilfsmittelFK == hilfsmittelPK)
+					{
+						gridViewRow.Cells["Gekauft"].Value = Convert.ToInt32(row["Anzahl"]);
+					}
+				}
+			}
 		}
 
 		private void SetupDataGridViewStatistik()
@@ -210,6 +230,13 @@ namespace BugFixer
         }
 
 		bool selectable = true;
+
+		private void timerGridViews_Tick(object sender, EventArgs e)
+		{
+			InitializeDataGridViews();
+			timerGridViews.Enabled = false;
+		}
+
 		private void dataGridViewProgrammierer_SelectionChanged(object sender, EventArgs e)
 		{
 			if (selectable == true)
