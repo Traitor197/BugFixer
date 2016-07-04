@@ -42,16 +42,17 @@ namespace BugFixer
 			}
 		}
 
-        public Spiel(Account account, OleDbConnection con)
+        public Spiel(Account account, OleDbConnection con, DTO dto)
 		{
             this.account = account;
-            this.con = con;
-            this.dto = new DTO();
+            this.dto = dto;
+
             FixesProKlick = 1;
             FixesProSekunde = 0;
-
+            
 			InitializeComponent();
-            InitDataAdapters();
+            //InitDataAdapters();
+            InitializeDTO();
             Initialize();
             SetupDataGridViewStatistik();
 			InitializeControls();
@@ -70,54 +71,27 @@ namespace BugFixer
             timer1.Enabled = true;
 		}
 
-        private void InitDataAdapters()
+        private void InitializeDTO()
         {
-            adapterProgrammierer = new OleDbDataAdapter("SELECT * FROM Hilfsmittel WHERE findetViren=false", con);
-            OleDbCommandBuilder cmdBuilder = new OleDbCommandBuilder(adapterProgrammierer);
-            adapterProgrammierer.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            adapterProgrammierer.InsertCommand = cmdBuilder.GetInsertCommand();
-            adapterProgrammierer.UpdateCommand = cmdBuilder.GetUpdateCommand();
+            dto.InitDataAdapters(account.ID);
 
-            adapterVirensucher = new OleDbDataAdapter("SELECT * FROM Hilfsmittel WHERE findetViren=true", con);
-            cmdBuilder = new OleDbCommandBuilder(adapterVirensucher);
-            adapterVirensucher.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            adapterVirensucher.InsertCommand = cmdBuilder.GetInsertCommand();
-            adapterVirensucher.UpdateCommand = cmdBuilder.GetUpdateCommand();
+            dtProgrammierer = new DataTable();
+            dtVirensucher = new DataTable();
+            dtStatistik = new DataTable();
+            dtSpeicherstand = new DataTable();
 
-            adapterStatistik = new OleDbDataAdapter("SELECT * FROM Statistik WHERE Account=" + account.ID.ToString(), con);
-            cmdBuilder = new OleDbCommandBuilder(adapterStatistik);
-            adapterStatistik.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            adapterStatistik.InsertCommand = cmdBuilder.GetInsertCommand();
-            adapterStatistik.UpdateCommand = cmdBuilder.GetUpdateCommand();
+            dto.GetProgrammierer(dtProgrammierer);
+            dto.GetVirensucher(dtVirensucher);
+            dto.GetStatistik(dtStatistik);
+            dto.GetSpeicherstand(dtSpeicherstand);
 
-            adapterSpeicherstand = new OleDbDataAdapter("SELECT * FROM Speicherstand WHERE Account=" + account.ID.ToString(), con);
-            cmdBuilder = new OleDbCommandBuilder(adapterSpeicherstand);
-            adapterSpeicherstand.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            adapterSpeicherstand.InsertCommand = cmdBuilder.GetInsertCommand();
-            adapterSpeicherstand.UpdateCommand = cmdBuilder.GetUpdateCommand();
+            dataGridViewProgrammierer.DataSource = dtProgrammierer;
+            dataGridViewVirensucher.DataSource = dtVirensucher;
+            dataGridViewStatistik.DataSource = dtStatistik;
         }
 
         private void Initialize()
         {
-            // Programmierer
-            dtProgrammierer = new DataTable(); 
-            adapterProgrammierer.Fill(dtProgrammierer);
-            dataGridViewProgrammierer.DataSource = dtProgrammierer;
-
-            // Virensucher
-            dtVirensucher = new DataTable();
-            adapterVirensucher.Fill(dtVirensucher);
-            dataGridViewVirensucher.DataSource = dtVirensucher;
-
-            // Statistik
-            dtStatistik = new DataTable();
-            adapterStatistik.Fill(dtStatistik);
-            dataGridViewStatistik.DataSource = dtStatistik;
-
-            // Speicherstand
-            dtSpeicherstand = new DataTable();
-            adapterSpeicherstand.Fill(dtSpeicherstand);
-
             // Ermittle Wert für FixesProKlick
             foreach (DataRow row in dtProgrammierer.Rows)
             {
@@ -231,7 +205,8 @@ namespace BugFixer
 
         private void Spiel_FormClosing(object sender, FormClosingEventArgs e)
         {
-            adapterStatistik.Update(dtStatistik);
+            dto.SpeichereStatistik(dtStatistik);
+            dto.SpeichereSpeicherstand(dtSpeicherstand);
         }
 
 		bool selectable = true;

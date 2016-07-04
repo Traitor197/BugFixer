@@ -140,8 +140,7 @@ namespace DatenTransferDLL
 
         }
 
-        /*
-        private void InitDataAdapters()
+        public void InitDataAdapters(int accountID)
         {
             adapterProgrammierer = new OleDbDataAdapter("SELECT * FROM Hilfsmittel WHERE findetViren=false", con);
             OleDbCommandBuilder cmdBuilder = new OleDbCommandBuilder(adapterProgrammierer);
@@ -155,18 +154,47 @@ namespace DatenTransferDLL
             adapterVirensucher.InsertCommand = cmdBuilder.GetInsertCommand();
             adapterVirensucher.UpdateCommand = cmdBuilder.GetUpdateCommand();
 
-            adapterStatistik = new OleDbDataAdapter("SELECT * FROM Statistik WHERE Account=" + account.ID.ToString(), con);
+            adapterStatistik = new OleDbDataAdapter("SELECT * FROM Statistik WHERE Account=" + accountID.ToString(), con);
             cmdBuilder = new OleDbCommandBuilder(adapterStatistik);
             adapterStatistik.DeleteCommand = cmdBuilder.GetDeleteCommand();
             adapterStatistik.InsertCommand = cmdBuilder.GetInsertCommand();
             adapterStatistik.UpdateCommand = cmdBuilder.GetUpdateCommand();
 
-            adapterSpeicherstand = new OleDbDataAdapter("SELECT * FROM Speicherstand WHERE Account=" + account.ID.ToString(), con);
+            adapterSpeicherstand = new OleDbDataAdapter("SELECT * FROM Speicherstand WHERE Account=" + accountID.ToString(), con);
             cmdBuilder = new OleDbCommandBuilder(adapterSpeicherstand);
             adapterSpeicherstand.DeleteCommand = cmdBuilder.GetDeleteCommand();
             adapterSpeicherstand.InsertCommand = cmdBuilder.GetInsertCommand();
             adapterSpeicherstand.UpdateCommand = cmdBuilder.GetUpdateCommand();
         }
-        */
+
+        public void SpeichereStatistik(DataTable dt)
+        {
+            adapterStatistik.Update(dt);
+        }
+
+        public void SpeichereSpeicherstand(DataTable dt)
+        {
+            adapterSpeicherstand.Update(dt);
+        }
+
+        public void GetProgrammierer(DataTable dt)
+        {
+            adapterProgrammierer.Fill(dt);
+        }
+
+        public void GetVirensucher(DataTable dt)
+        {
+            adapterVirensucher.Fill(dt);
+        }
+
+        public void GetStatistik(DataTable dt)
+        {
+            adapterStatistik.Fill(dt);
+        }
+
+        public void GetSpeicherstand(DataTable dt)
+        {
+            adapterSpeicherstand.Fill(dt);
+        }
     }
 }

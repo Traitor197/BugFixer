@@ -50,17 +50,6 @@ namespace BugFixer
 
         }
 
-        private void InitAdapters()
-        {
-            OleDbCommandBuilder cmdBuilder;
-            // Instantiate adapters
-            AdapterAccount = new OleDbDataAdapter("SELECT * FROM Account", con);
-            cmdBuilder = new OleDbCommandBuilder(AdapterAccount);
-            AdapterAccount.DeleteCommand = cmdBuilder.GetDeleteCommand();
-            AdapterAccount.InsertCommand = cmdBuilder.GetInsertCommand();
-            AdapterAccount.UpdateCommand = cmdBuilder.GetUpdateCommand();
-        }
-
         private bool userInputCheck()
         {
             if (textBoxNickname.Text.Length < 4)
@@ -90,7 +79,7 @@ namespace BugFixer
                 if (account.Passwort == textBoxPasswort.Text)
                 {
                     labelStatus.Text = "Anmeldung erfolgreich!";
-                    Spiel spiel = new Spiel(account, con);
+                    Spiel spiel = new Spiel(account, con, dto);
                     spiel.Show();
 
                     return;
