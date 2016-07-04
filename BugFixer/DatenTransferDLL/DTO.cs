@@ -59,7 +59,7 @@ namespace DatenTransferDLL
         public bool InsertNewAccount(string nickname, string passwort)
         {
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "Insert Into Account (Nickname, Passwort) Values ('" + nickname + "', '" + passwort + "');";
+            cmd.CommandText = "INSERT INTO Account (Nickname, Passwort) VALUES ('" + nickname + "', '" + passwort + "');";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = "SELECT ID FROM Account WHERE Nickname='" + nickname + "'";

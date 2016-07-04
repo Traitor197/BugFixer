@@ -22,6 +22,8 @@ namespace BugFixer
         private OleDbDataAdapter adapterProgrammierer, adapterVirensucher, adapterStatistik, adapterSpeicherstand;
         private DataTable dtProgrammierer, dtVirensucher, dtStatistik, dtSpeicherstand;
 
+        private float kostenMultiplier = 1.1f;
+
         public int FixesProSekunde { get; set; }
         public int FixesProKlick { get; set; }
         
@@ -51,7 +53,6 @@ namespace BugFixer
             FixesProSekunde = 0;
             
 			InitializeComponent();
-            //InitDataAdapters();
             InitializeDTO();
             Initialize();
             SetupDataGridViewStatistik();
@@ -90,7 +91,6 @@ namespace BugFixer
 
             dataGridViewProgrammierer.DataSource = dtProgrammierer;
             dataGridViewVirensucher.DataSource = dtVirensucher;
-            dataGridViewStatistik.DataSource = dtStatistik;
         }
 
         private void Initialize()
@@ -108,6 +108,8 @@ namespace BugFixer
                         int fixwert = Convert.ToInt32(row["Fixwert"]);
 
                         FixesProKlick += fixwert * anzahl;
+
+                        row["Kaufkosten"] = Convert.ToInt32(row["Kaufkosten"]) * kostenMultiplier;
                     }
                 }
             }
@@ -125,6 +127,8 @@ namespace BugFixer
                         int fixwert = Convert.ToInt32(row["Fixwert"]);
 
                         FixesProSekunde += fixwert * anzahl;
+
+                        row["Kaufkosten"] = Convert.ToInt32(row["Kaufkosten"]) * kostenMultiplier;
                     }
                 }
             }
@@ -306,8 +310,9 @@ namespace BugFixer
 					int hilfsmittelPK = Convert.ToInt32(selectedRow[0].Cells["ID"].Value);
 					if (hilfsmittelFK == hilfsmittelPK)
 					{
-						row["Anzahl"] = Convert.ToInt32(row["Anzahl"]) + 1;
-						selectedRow[0].Cells["Gekauft"].Value = Convert.ToInt32(row["Anzahl"]);
+						//row["Anzahl"] = Convert.ToInt32(row["Anzahl"]) + 1;
+                        //row["Kaufkosten"] = Convert.ToInt32(row["Kaufkosten"]) * kostenMultiplier;
+                        selectedRow[0].Cells["Gekauft"].Value = Convert.ToInt32(row["Anzahl"]);
 					}
 				}
 
