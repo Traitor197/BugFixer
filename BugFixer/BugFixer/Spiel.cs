@@ -24,7 +24,7 @@ namespace BugFixer
 
         public int FixesProSekunde { get; set; }
         public int FixesProKlick { get; set; }
-
+        
 		public int AktuelleFixes
 		{
 			get
