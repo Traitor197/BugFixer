@@ -16,10 +16,8 @@ namespace BugFixer
 	public partial class Spiel : Form
 	{
         private DTO dto;
-        private OleDbConnection con;
         private Account account;
 
-        private OleDbDataAdapter adapterProgrammierer, adapterVirensucher, adapterStatistik, adapterSpeicherstand;
         private DataTable dtProgrammierer, dtVirensucher, dtStatistik, dtSpeicherstand;
 
         private float kostenMultiplier = 1.1f;
@@ -109,7 +107,7 @@ namespace BugFixer
 
                         FixesProKlick += fixwert * anzahl;
 
-                        row["Kaufkosten"] = Convert.ToInt32(row["Kaufkosten"]) * kostenMultiplier;
+                        row["Kaufkosten"] = Convert.ToInt32(row["Kaufkosten"]) * Math.Pow(kostenMultiplier, anzahl);
                     }
                 }
             }
@@ -128,7 +126,7 @@ namespace BugFixer
 
                         FixesProSekunde += fixwert * anzahl;
 
-                        row["Kaufkosten"] = Convert.ToInt32(row["Kaufkosten"]) * kostenMultiplier;
+                        row["Kaufkosten"] = Convert.ToInt32(row["Kaufkosten"]) * Math.Pow(kostenMultiplier, anzahl);
                     }
                 }
             }
@@ -160,9 +158,9 @@ namespace BugFixer
 
 		private void InitializeDataGridViews()
 		{
-			dataGridViewProgrammierer.Sort(dataGridViewProgrammierer.Columns["Kaufkosten"], ListSortDirection.Ascending);
-			dataGridViewVirensucher.Sort(dataGridViewVirensucher.Columns["Kaufkosten"], ListSortDirection.Ascending);
-
+			dataGridViewProgrammierer.Sort(dataGridViewProgrammierer.Columns["Fixwert"], ListSortDirection.Ascending);
+			dataGridViewVirensucher.Sort(dataGridViewVirensucher.Columns["Fixwert"], ListSortDirection.Ascending);
+            dataGridViewStatistik.ClearSelection();
 			DataGridViewRowCollection rows = dataGridViewProgrammierer.Rows;
 			DataRowCollection collection = dtSpeicherstand.Rows;
 			foreach (DataRow row in collection)
@@ -310,8 +308,8 @@ namespace BugFixer
 					int hilfsmittelPK = Convert.ToInt32(selectedRow[0].Cells["ID"].Value);
 					if (hilfsmittelFK == hilfsmittelPK)
 					{
-						//row["Anzahl"] = Convert.ToInt32(row["Anzahl"]) + 1;
-                        //row["Kaufkosten"] = Convert.ToInt32(row["Kaufkosten"]) * kostenMultiplier;
+						row["Anzahl"] = Convert.ToInt32(row["Anzahl"]) + 1;
+                        selectedRow[0].Cells["Kaufkosten"].Value = Convert.ToInt32(Convert.ToInt32(selectedRow[0].Cells["Kaufkosten"].Value) * kostenMultiplier);
                         selectedRow[0].Cells["Gekauft"].Value = Convert.ToInt32(row["Anzahl"]);
 					}
 				}

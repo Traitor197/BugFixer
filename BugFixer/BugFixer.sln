@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFixer", "BugFixer\BugFixer.csproj", "{E8C6AA00-B106-4E95-B5A6-337FAA4BB7FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiBugFixer", "BugFixer\GuiBugFixer.csproj", "{E8C6AA00-B106-4E95-B5A6-337FAA4BB7FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatenTransferDLL", "DatenTransferDLL\DatenTransferDLL.csproj", "{79E38E2E-93EF-47C3-AD23-4EC22C72F455}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelBugFixer", "ModelBugFixer\ModelBugFixer.csproj", "{DF9E3E6A-717C-4C38-8ECA-0BC0101F0DDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelBugFixerDLL", "ModelBugFixer\ModelBugFixerDLL.csproj", "{DF9E3E6A-717C-4C38-8ECA-0BC0101F0DDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

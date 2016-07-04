@@ -58,9 +58,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModelBugFixer\ModelBugFixer.csproj">
+    <ProjectReference Include="..\ModelBugFixer\ModelBugFixerDLL.csproj">
       <Project>{df9e3e6a-717c-4c38-8eca-0bc0101f0dde}</Project>
-      <Name>ModelBugFixer</Name>
+      <Name>ModelBugFixerDLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
